@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'media_provider.dart';
+part of 'media_providers.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -38,5 +38,21 @@ final getMediaListProvider =
 );
 
 typedef GetMediaListRef = AutoDisposeFutureProviderRef<List<MediaEntity>>;
+String _$getMediaTrendsHash() => r'15fe43d59c2eeec0fd300daa8adcf939d7e68c61';
+
+/// See also [getMediaTrends].
+@ProviderFor(getMediaTrends)
+final getMediaTrendsProvider =
+    AutoDisposeFutureProvider<List<MediaEntity>>.internal(
+  getMediaTrends,
+  name: r'getMediaTrendsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getMediaTrendsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetMediaTrendsRef = AutoDisposeFutureProviderRef<List<MediaEntity>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

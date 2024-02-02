@@ -1,13 +1,13 @@
 import 'package:anilistapp/infrastructure/models/media/media_page_model.dart';
 
 class MediaPageResponseModel {
-  MediaPageResponseModel({required this.data});
+  MediaPageResponseModel({required this.page});
 
-  final MediaPageModel data;
+  final MediaPageModel page;
 
   factory MediaPageResponseModel.fromJson(Map<String, dynamic> json) {
     return MediaPageResponseModel(
-      data: MediaPageModel.fromJson(json['Page']),
+      page: MediaPageModel.fromJson(json['Page']),
     );
   }
 }

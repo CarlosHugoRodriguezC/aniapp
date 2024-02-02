@@ -1,14 +1,13 @@
-import 'package:anilistapp/infrastructure/models/media/media_trending_model.dart';
+import 'package:anilistapp/infrastructure/models/media/media_page_trending_model.dart';
 
 class MediaPageTrendingResponseModel {
-  MediaPageTrendingResponseModel({required this.data});
+  MediaPageTrendingResponseModel({required this.page});
 
-  final List<MediaTrendModel> data;
+  final MediaPageTrendingModel page;
 
   factory MediaPageTrendingResponseModel.fromJson(Map<String, dynamic> json) {
-    throw UnimplementedError();
-    // return MediaPageTrendingResponseModel(
-    //   data:  MediaTrendModel.fromJson(json['Page']['trending'] as Map<String, dynamic>);
-    // );
+    return MediaPageTrendingResponseModel(
+      page: MediaPageTrendingModel.fromJson(json['Page']),
+    );
   }
 }

@@ -1,21 +1,21 @@
 import 'package:anilistapp/infrastructure/models/media/media_model.dart';
 
 class MediaTrendModel {
-  final int mediaId;
-  final int trending;
-  final dynamic episode;
-  final int averageScore;
-  final int date;
-  final MediaModel media;
-
   MediaTrendModel({
     required this.mediaId,
     required this.trending,
-    required this.episode,
+    this.episode,
     required this.averageScore,
     required this.date,
     required this.media,
   });
+
+  final int mediaId;
+  final int trending;
+  final int? episode;
+  final int averageScore;
+  final int date;
+  final MediaModel media;
 
   @override
   factory MediaTrendModel.fromJson(Map<String, dynamic> json) {

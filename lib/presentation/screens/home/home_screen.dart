@@ -1,4 +1,4 @@
-import 'package:anilistapp/presentation/providers/media/media_provider.dart';
+import 'package:anilistapp/presentation/providers/media/media_providers.dart';
 import 'package:anilistapp/presentation/screens/home/widgets/main_banner.dart';
 import 'package:anilistapp/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class HomeScreen extends ConsumerWidget {
             const SizedBox(height: 16),
             mediaList$.when(
               data: (medias) => MediaSectionSlider(
-                title: "Today's Selection",
+                title: "Popular of season",
                 medias: medias,
               ),
               loading: () => const Center(
