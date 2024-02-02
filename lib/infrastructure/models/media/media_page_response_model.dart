@@ -1,9 +1,9 @@
-import 'package:anilistapp/infrastructure/models/graph_response/graph_data_model.dart';
 import 'package:anilistapp/infrastructure/models/media/media_page_model.dart';
 
-class MediaPageResponseModel
-    extends GraphDataModel<MediaPageModel> {
-  MediaPageResponseModel({required super.data});
+class MediaPageResponseModel {
+  MediaPageResponseModel({required this.data});
+
+  final MediaPageModel data;
 
   factory MediaPageResponseModel.fromJson(Map<String, dynamic> json) {
     return MediaPageResponseModel(

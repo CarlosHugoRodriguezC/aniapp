@@ -41,4 +41,9 @@ class AnilistMediaDatasource implements MediaDatasource {
       rethrow;
     }
   }
+
+  @override
+  Future<List<MediaEntity>> getMediaTrending() async {
+    return [];
+  }
 }
