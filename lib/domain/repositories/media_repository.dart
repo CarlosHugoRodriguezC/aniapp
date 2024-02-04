@@ -4,4 +4,5 @@ abstract class MediaRepository {
   Future<List<MediaEntity>> getMediaList();
   Future<List<MediaEntity>> getMediaTrending();
   Future<MediaEntity> getMedia(int id);
+  Future<MediaEntity> getPopularMediaOfYear(int year);
 }

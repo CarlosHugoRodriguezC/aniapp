@@ -9,12 +9,22 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final mediaPopular$ = ref.watch(getMediaPopularOfSeasonYearProvider);
     final mediaList$ = ref.watch(getMediaListProvider);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const MainBanner(),
+            mediaPopular$.when(
+              data: (media) => MainBanner(media: media),
+              error: (error, stackTrace) => Center(
+                child: Text('Error: $error'),
+              ),
+              loading: () => const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
             const SizedBox(height: 16),
             mediaList$.when(
               data: (medias) => MediaSectionSlider(

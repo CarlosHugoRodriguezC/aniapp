@@ -54,5 +54,23 @@ final getMediaTrendsProvider =
 );
 
 typedef GetMediaTrendsRef = AutoDisposeFutureProviderRef<List<MediaEntity>>;
+String _$getMediaPopularOfSeasonYearHash() =>
+    r'9a3c0394cb5122e1e6b5f31cf8a6b7fa916a5a66';
+
+/// See also [getMediaPopularOfSeasonYear].
+@ProviderFor(getMediaPopularOfSeasonYear)
+final getMediaPopularOfSeasonYearProvider =
+    AutoDisposeFutureProvider<MediaEntity>.internal(
+  getMediaPopularOfSeasonYear,
+  name: r'getMediaPopularOfSeasonYearProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getMediaPopularOfSeasonYearHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetMediaPopularOfSeasonYearRef
+    = AutoDisposeFutureProviderRef<MediaEntity>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

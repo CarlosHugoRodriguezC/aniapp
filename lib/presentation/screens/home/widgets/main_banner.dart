@@ -1,3 +1,4 @@
+import 'package:anilistapp/domain/entities/media_entity.dart';
 import 'package:anilistapp/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,7 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class MainBanner extends StatelessWidget {
   const MainBanner({
     super.key,
+    required this.media,
   });
+
+  final MediaEntity media;
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +18,24 @@ class MainBanner extends StatelessWidget {
       :titleLarge,
       :titleSmall,
     ) = Theme.of(context).textTheme;
+
     return Container(
       height: 400.h,
       width: double.infinity,
+      decoration: BoxDecoration(
+        color: colorScheme.background,
+        boxShadow: null,
+      ),
       child: Stack(
         children: [
-          Image.network(
-            'https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx151807-m1gX3iwfIsLu.png',
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 1),
+            child: Image.network(
+              media.coverImage,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
+            ),
           ),
           Container(
               width: double.infinity,
@@ -45,9 +57,13 @@ class MainBanner extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Solo leveling',
-                      style: titleLarge,
+                    SizedBox(
+                      width: 250.w,
+                      child: Text(
+                        media.title,
+                        style: titleLarge,
+                        softWrap: true,
+                      ),
                     ),
                     Text(
                       'Action, Adventure, Fantasy',
@@ -76,7 +92,8 @@ class MainBanner extends StatelessWidget {
                           onPressed: () {},
                         )
                       ],
-                    )
+                    ),
+                    SizedBox(height: 10.h),
                   ],
                 ),
               )),

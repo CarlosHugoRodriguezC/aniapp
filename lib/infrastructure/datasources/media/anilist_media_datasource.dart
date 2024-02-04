@@ -3,6 +3,7 @@ import 'package:anilistapp/domain/entities/media_entity.dart';
 import 'package:anilistapp/infrastructure/mapers/media_mapper.dart';
 import 'package:anilistapp/infrastructure/models/media/media_page_response_model.dart';
 import 'package:anilistapp/infrastructure/models/media/media_page_trending_response_model.dart';
+import 'package:anilistapp/infrastructure/models/models.dart';
 import 'package:anilistapp/infrastructure/queries/media/media_queries.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -63,6 +64,34 @@ class AnilistMediaDatasource implements MediaDatasource {
       return response.page.mediaTrending
           .map((m) => MediaMapper.mapToEntity(m.media))
           .toList();
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<MediaEntity> getPopularMediaOfYear(int year) async {
+    final options = QueryOptions(
+      document: gql(
+        MediaQueries.getPupularMediaOfSeasonYear,
+      ),
+      variables: {
+        'year': year,
+        'mediaType': 'ANIME',
+        'format': 'TV',
+      },
+    );
+
+    try {
+      final result = await client.query(options);
+
+      if (result.hasException) {
+        throw Exception(result.exception.toString());
+      }
+
+      final response = MediaModel.fromJson(result.data!['Media']);
+
+      return MediaMapper.mapToEntity(response);
     } catch (e) {
       rethrow;
     }

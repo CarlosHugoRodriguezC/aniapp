@@ -1,4 +1,36 @@
 class MediaQueries {
+  static String getPupularMediaOfSeasonYear = r'''
+      query getPopularMediaOfSeasonYear(
+        $year: Int
+        $mediaType: MediaType
+        $format: MediaFormat
+      ) {
+        Media(
+          sort: POPULARITY_DESC
+          seasonYear: $year
+          status: RELEASING
+          type: $mediaType
+          format: $format
+        ) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            color
+            large
+            medium
+            extraLarge
+          }
+          bannerImage
+          description
+          averageScore
+        }
+      }
+    ''';
+
   static String getPopularMediaOfYear({required int year}) {
     return '''
       query seasonPopular {

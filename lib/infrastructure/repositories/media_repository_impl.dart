@@ -14,11 +14,14 @@ class MediaRepositoryImpl extends MediaRepository {
   Future<MediaEntity> getMedia(int id) {
     return _mediaDatasource.getMedia(id);
   }
-  
+
   @override
   Future<List<MediaEntity>> getMediaTrending() {
     return _mediaDatasource.getMediaTrending();
   }
 
-
+  @override
+  Future<MediaEntity> getPopularMediaOfYear(int year) {
+    return _mediaDatasource.getPopularMediaOfYear(year);
+  }
 }

@@ -29,3 +29,13 @@ Future<List<MediaEntity>> getMediaTrends(GetMediaTrendsRef ref) async {
 
   return result;
 }
+
+@riverpod
+Future<MediaEntity> getMediaPopularOfSeasonYear(
+    GetMediaPopularOfSeasonYearRef ref) async {
+  final repository = ref.watch(getMediaRepositoryProvider);
+
+  final result = await repository.getPopularMediaOfYear(DateTime.now().year);
+
+  return result;
+}
