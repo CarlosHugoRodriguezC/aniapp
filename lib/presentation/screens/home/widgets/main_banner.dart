@@ -7,9 +7,15 @@ class MainBanner extends StatelessWidget {
   const MainBanner({
     super.key,
     required this.media,
+    this.onMoreDetails,
+    this.onFavorite,
+    this.onShare,
   });
 
   final MediaEntity media;
+  final VoidCallback? onMoreDetails;
+  final VoidCallback? onFavorite;
+  final VoidCallback? onShare;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +72,7 @@ class MainBanner extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Action, Adventure, Fantasy',
+                      media.genres.join(', '),
                       style: titleSmall?.copyWith(
                         color: Colors.black45,
                       ),
@@ -77,19 +83,19 @@ class MainBanner extends StatelessWidget {
                         CustomFilledButton(
                           label: 'Details',
                           icon: Icons.arrow_forward_ios_outlined,
-                          onPressed: () {},
+                          onPressed: onMoreDetails,
                         ),
                         SizedBox(width: 10.w),
                         CustomIconButton(
                           icon: Icons.favorite_outline,
                           backgroundColor: Colors.black.withOpacity(0.7),
-                          onPressed: () {},
+                          onPressed: onFavorite,
                         ),
                         SizedBox(width: 10.w),
                         CustomIconButton(
                           icon: Icons.share_outlined,
                           backgroundColor: Colors.black.withOpacity(0.7),
-                          onPressed: () {},
+                          onPressed: onShare,
                         )
                       ],
                     ),

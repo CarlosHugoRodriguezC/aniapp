@@ -1,5 +1,28 @@
 class MediaQueries {
-  static String getPupularMediaOfSeasonYear = r'''
+  static String mediaByIdQuery = r'''
+      query getMediaById($id: Int) {
+        Media(id: $id) {
+          id
+          title {
+            romaji
+            english
+            native
+          }
+          coverImage {
+            color
+            large
+            medium
+            extraLarge
+          }
+          bannerImage
+          description
+          averageScore
+          genres
+        }
+      }
+    ''';
+
+  static String popularMediaOfSeasonYearQuery = r'''
       query getPopularMediaOfSeasonYear(
         $year: Int
         $mediaType: MediaType
@@ -24,6 +47,7 @@ class MediaQueries {
             medium
             extraLarge
           }
+          genres
           bannerImage
           description
           averageScore
@@ -31,8 +55,7 @@ class MediaQueries {
       }
     ''';
 
-  static String getPopularMediaOfYear({required int year}) {
-    return '''
+  static String popularMediaOfYearQuery = r'''
       query seasonPopular {
         Media(seasonYear: $year, sort: POPULARITY_DESC) {
           id
@@ -53,13 +76,16 @@ class MediaQueries {
         }
       }
     ''';
-  }
 
-  static String getMediaPageQuery(int page, int perPage) {
-    return '''
-      query {
+  static String pageMediaQuery = r'''
+      query pageMediaQuery($page: Int, $perPage: Int, $year: Int) {
         Page(page: $page, perPage: $perPage) {
-          media(status: RELEASING, seasonYear: 2024, type: ANIME, sort: POPULARITY_DESC) {
+          media(
+            status: RELEASING
+            seasonYear: $year
+            type: ANIME
+            sort: POPULARITY_DESC
+          ) {
             id
             title {
               romaji
@@ -78,11 +104,9 @@ class MediaQueries {
         }
       }
     ''';
-  }
 
-  static String getMediaPageTrendingQuery(int page, int perPage) {
-    return '''
-      query  {
+  static String pageMediaTrendingQuery = r'''
+      query pageMediaTrending($page: Int, $perPage: Int){
         Page(page: $page, perPage: $perPage) {
           mediaTrends {
             mediaId
@@ -113,5 +137,4 @@ class MediaQueries {
         }
       }
     ''';
-  }
 }

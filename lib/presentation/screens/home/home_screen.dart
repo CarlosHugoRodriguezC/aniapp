@@ -3,6 +3,7 @@ import 'package:anilistapp/presentation/screens/home/widgets/main_banner.dart';
 import 'package:anilistapp/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -17,7 +18,12 @@ class HomeScreen extends ConsumerWidget {
         child: Column(
           children: [
             mediaPopular$.when(
-              data: (media) => MainBanner(media: media),
+              data: (media) => MainBanner(
+                media: media,
+                onMoreDetails: () => context.push('/media/${media.id}'),
+                onFavorite: () {},
+                onShare: () {},
+              ),
               error: (error, stackTrace) => Center(
                 child: Text('Error: $error'),
               ),
@@ -30,13 +36,16 @@ class HomeScreen extends ConsumerWidget {
               data: (medias) => MediaSectionSlider(
                 title: "Popular of season",
                 medias: medias,
+                onTapSlide: (id) => context.push('/media/$id'),
               ),
               loading: () => const Center(
                 child: CircularProgressIndicator(),
               ),
-              error: (error, stackTrace) => Center(
-                child: Text('Error: $error'),
-              ),
+              error: (error, stackTrace) {
+                return Center(
+                  child: Text('Error: $error'),
+                );
+              },
             ),
           ],
         ),

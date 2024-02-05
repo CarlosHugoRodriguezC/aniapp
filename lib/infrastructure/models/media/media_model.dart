@@ -1,57 +1,76 @@
-import 'package:anilistapp/infrastructure/models/json_serializable/json_serializable_model.dart';
-import 'package:anilistapp/infrastructure/models/media/media_cover_image_model.dart';
-import 'package:anilistapp/infrastructure/models/media/media_title_model.dart';
+class MediaModel {
+  final int id;
+  final MediaTitle title;
+  final MediaCoverImage coverImage;
+  final String bannerImage;
+  final String description;
+  final int averageScore;
+  final List<String> genres;
 
-class MediaModel extends JsonSerializableModel {
   MediaModel({
     required this.id,
-    required this.bannerImage,
     required this.title,
-    required this.averageScore,
-    required this.description,
     required this.coverImage,
+    required this.bannerImage,
+    required this.description,
+    required this.averageScore,
+    required this.genres,
   });
 
-  final int id;
-  final String? bannerImage;
-  final MediaTitle title;
-  final int averageScore;
-  final String description;
-  final MediaCoverImageModel coverImage;
+  factory MediaModel.fromJson(Map<String, dynamic> json) {
+    return MediaModel(
+      id: json['id'],
+      title: MediaTitle.fromJson(json['title']),
+      coverImage: MediaCoverImage.fromJson(json['coverImage']),
+      bannerImage: json['bannerImage'] ?? 'https://via.placeholder.com/150',
+      description: json['description'] ?? 'No description',
+      averageScore: json['averageScore'] ?? 0,
+      genres: ((json['genres'] ?? []) as List<dynamic>)
+          .map((genre) => genre as String)
+          .toList(),
+    );
+  }
+}
 
-  MediaModel copyWith({
-    int? id,
-    String? bannerImage,
-    MediaTitle? title,
-    int? averageScore,
-    String? description,
-    MediaCoverImageModel? coverImage,
-  }) =>
-      MediaModel(
-        id: id ?? this.id,
-        bannerImage: bannerImage ?? this.bannerImage,
-        title: title ?? this.title,
-        averageScore: averageScore ?? this.averageScore,
-        description: description ?? this.description,
-        coverImage: coverImage ?? this.coverImage,
-      );
+class MediaCoverImage {
+  final String color;
+  final String large;
+  final String medium;
+  final String extraLarge;
 
-  @override
-  factory MediaModel.fromJson(Map<String, dynamic> json) => MediaModel(
-        id: json["id"],
-        bannerImage: json["bannerImage"] ?? 'https://placehold.it/300x300',
-        title: MediaTitle.fromJson(json["title"]),
-        averageScore: json["averageScore"] ?? 0,
-        description: json["description"],
-        coverImage: MediaCoverImageModel.fromJson(json["coverImage"])
-      );
+  MediaCoverImage({
+    required this.color,
+    required this.large,
+    required this.medium,
+    required this.extraLarge,
+  });
 
-  @override
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "bannerImage": bannerImage,
-        "title": title.toJson(),
-        "averageScore": averageScore,
-        "description": description,
-      };
+  factory MediaCoverImage.fromJson(Map<String, dynamic> json) {
+    return MediaCoverImage(
+      color: json['color'] ?? "0x000000",
+      large: json['large'] ?? 'https://via.placeholder.com/150',
+      medium: json['medium'] ?? 'https://via.placeholder.com/150',
+      extraLarge: json['extraLarge'] ?? 'https://via.placeholder.com/150',
+    );
+  }
+}
+
+class MediaTitle {
+  final String romaji;
+  final String english;
+  final String native;
+
+  MediaTitle({
+    required this.romaji,
+    required this.english,
+    required this.native,
+  });
+
+  factory MediaTitle.fromJson(Map<String, dynamic> json) {
+    return MediaTitle(
+      romaji: json['romaji'],
+      english: json['english'] ?? 'No English title',
+      native: json['native'] ?? 'No native title',
+    );
+  }
 }

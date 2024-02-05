@@ -10,6 +10,8 @@ dependencies:
   animate_do: ^3.3.3
   flutter:
     sdk: flutter
+  flutter_html: ^3.0.0-beta.2
+  flutter_html_all: ^3.0.0-beta.2
   flutter_riverpod: ^2.4.9
   flutter_screenutil: ^5.9.0
   go_router: ^13.1.0

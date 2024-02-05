@@ -39,3 +39,12 @@ Future<MediaEntity> getMediaPopularOfSeasonYear(
 
   return result;
 }
+
+@riverpod
+FutureOr<MediaEntity> getMediaById(GetMediaByIdRef ref, int id) async {
+  final repository = ref.watch(getMediaRepositoryProvider);
+
+  final result = await repository.getMedia(id);
+
+  return result;
+}

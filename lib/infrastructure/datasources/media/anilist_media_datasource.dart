@@ -1,8 +1,6 @@
 import 'package:anilistapp/domain/datasources/media_datasource.dart';
 import 'package:anilistapp/domain/entities/media_entity.dart';
 import 'package:anilistapp/infrastructure/mapers/media_mapper.dart';
-import 'package:anilistapp/infrastructure/models/media/media_page_response_model.dart';
-import 'package:anilistapp/infrastructure/models/media/media_page_trending_response_model.dart';
 import 'package:anilistapp/infrastructure/models/models.dart';
 import 'package:anilistapp/infrastructure/queries/media/media_queries.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -15,16 +13,14 @@ class AnilistMediaDatasource implements MediaDatasource {
   final GraphQLClient client;
 
   @override
-  Future<MediaEntity> getMedia(int id) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<MediaEntity>> getMediaList() async {
+  Future<MediaEntity> getMedia(int id) async {
     final options = QueryOptions(
       document: gql(
-        MediaQueries.getMediaPageQuery(1, 10),
+        MediaQueries.mediaByIdQuery,
       ),
+      variables: {
+        'id': id,
+      },
     );
 
     try {
@@ -34,11 +30,37 @@ class AnilistMediaDatasource implements MediaDatasource {
         throw Exception(result.exception.toString());
       }
 
-      final response = MediaPageResponseModel.fromJson(result.data!);
+      final response = MediaModel.fromJson(result.data!['Media']);
 
-      return response.page.media
-          .map((m) => MediaMapper.mapToEntity(m))
-          .toList();
+      return MediaMapper.mapToEntity(response);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<MediaEntity>> getMediaList() async {
+    final options = QueryOptions(
+      document: gql(
+        MediaQueries.pageMediaQuery,
+      ),
+      variables: {
+        'page': 1,
+        'perPage': 10,
+        'year': DateTime.now().year,
+      },
+    );
+
+    try {
+      final result = await client.query(options);
+
+      if (result.hasException) {
+        throw Exception(result.exception.toString());
+      }
+
+      final response = PageMediaModel.fromJson(result.data!['Page']);
+
+      return response.media.map((m) => MediaMapper.mapToEntity(m)).toList();
     } catch (e) {
       rethrow;
     }
@@ -48,8 +70,13 @@ class AnilistMediaDatasource implements MediaDatasource {
   Future<List<MediaEntity>> getMediaTrending() async {
     final options = QueryOptions(
       document: gql(
-        MediaQueries.getMediaPageTrendingQuery(1, 10),
+        MediaQueries.pageMediaTrendingQuery,
       ),
+      variables: {
+        'page': 1,
+        'perPage': 10,
+        'year': DateTime.now().year,
+      },
     );
 
     try {
@@ -59,9 +86,9 @@ class AnilistMediaDatasource implements MediaDatasource {
         throw Exception(result.exception.toString());
       }
 
-      final response = MediaPageTrendingResponseModel.fromJson(result.data!);
+      final response = PageMediaTrendsModel.fromJson(result.data!['Page']);
 
-      return response.page.mediaTrending
+      return response.mediaTrends
           .map((m) => MediaMapper.mapToEntity(m.media))
           .toList();
     } catch (e) {
@@ -73,7 +100,7 @@ class AnilistMediaDatasource implements MediaDatasource {
   Future<MediaEntity> getPopularMediaOfYear(int year) async {
     final options = QueryOptions(
       document: gql(
-        MediaQueries.getPupularMediaOfSeasonYear,
+        MediaQueries.popularMediaOfSeasonYearQuery,
       ),
       variables: {
         'year': year,

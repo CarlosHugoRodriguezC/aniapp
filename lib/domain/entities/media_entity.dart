@@ -6,6 +6,7 @@ class MediaEntity {
     required this.bannerImage,
     required this.description,
     required this.score,
+    required this.genres,
   });
 
   final int id;
@@ -14,6 +15,7 @@ class MediaEntity {
   final String bannerImage;
   final String description;
   final double score;
+  final List<String> genres;
 
   MediaEntity copyWith({
     int? id,
@@ -22,6 +24,7 @@ class MediaEntity {
     String? bannerImage,
     String? description,
     double? score,
+    List<String>? genres,
   }) =>
       MediaEntity(
         id: id ?? this.id,
@@ -30,10 +33,11 @@ class MediaEntity {
         bannerImage: bannerImage ?? this.bannerImage,
         description: description ?? this.description,
         score: score ?? this.score,
+        genres: genres ?? this.genres,
       );
 
   @override
   String toString() {
-    return 'MediaEntity(id: $id, title: $title, coverImage: $coverImage, bannerImage: $bannerImage, description: $description)';
+    return 'MediaEntity(id: $id, title: $title, coverImage: $coverImage, bannerImage: $bannerImage, description: $description, score: $score, genres: $genres)';
   }
 }

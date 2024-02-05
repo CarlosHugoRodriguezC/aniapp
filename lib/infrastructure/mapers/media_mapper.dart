@@ -7,9 +7,10 @@ class MediaMapper {
       id: mediaModel.id,
       title: mediaModel.title.romaji,
       coverImage: mediaModel.coverImage.extraLarge,
-      bannerImage: mediaModel.bannerImage ?? 'https://via.placeholder.com/150',
+      bannerImage: mediaModel.bannerImage,
       description: mediaModel.description,
       score: mediaModel.averageScore.toDouble(),
+      genres: mediaModel.genres,
     );
   }
 }

@@ -9,12 +9,14 @@ class MediaSectionSlider extends StatefulWidget {
     this.title,
     this.subtitle,
     this.loadNextPage,
+    this.onTapSlide,
   });
 
   final List<MediaEntity> medias;
   final String? title;
   final String? subtitle;
   final VoidCallback? loadNextPage;
+  final void Function(int id)? onTapSlide;
 
   @override
   State<MediaSectionSlider> createState() => _MediaSectionSliderState();
@@ -65,12 +67,16 @@ class _MediaSectionSliderState extends State<MediaSectionSlider> {
               itemCount: widget.medias.length,
               padding: const EdgeInsets.symmetric(horizontal: 10),
               itemBuilder: (context, index) {
-                final MediaEntity(:title, :coverImage) = widget.medias[index];
+                final MediaEntity(:title, :coverImage, :id) =
+                    widget.medias[index];
                 return FadeInRight(
                   child: _Slide(
                     title: title,
                     subtitle: "Subtitle",
                     posterPath: coverImage,
+                    onTap: widget.onTapSlide != null
+                        ? () => widget.onTapSlide!(id)
+                        : null,
                   ),
                 );
               },
@@ -87,7 +93,7 @@ class _Slide extends StatelessWidget {
     required this.title,
     required this.subtitle,
     required this.posterPath,
-    this.onTap ,
+    this.onTap,
   });
 
   final String title;
@@ -106,6 +112,7 @@ class _Slide extends StatelessWidget {
           // NOTE: Image
           SizedBox(
             width: 150,
+            height: 200,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Image.network(
