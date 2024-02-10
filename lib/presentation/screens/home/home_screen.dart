@@ -1,4 +1,4 @@
-import 'package:anilistapp/presentation/providers/media/media_providers.dart';
+import 'package:anilistapp/presentation/providers/providers.dart';
 import 'package:anilistapp/presentation/screens/home/widgets/main_banner.dart';
 import 'package:anilistapp/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
