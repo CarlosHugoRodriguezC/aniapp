@@ -25,6 +25,17 @@ class GraphqlPlugin {
       GraphQLClient(
         cache: GraphQLCache(store: HiveStore()),
         link: link,
+        defaultPolicies: DefaultPolicies(
+          query: Policies(
+            fetch: FetchPolicy.noCache,
+          ),
+          watchQuery: Policies(
+            fetch: FetchPolicy.noCache,
+          ),
+          mutate: Policies(
+            fetch: FetchPolicy.noCache,
+          ),
+        ),
       ),
     );
 

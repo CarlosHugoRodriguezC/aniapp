@@ -15,9 +15,31 @@ class MediaQueries {
             extraLarge
           }
           bannerImage
+          trailer {
+            thumbnail
+            id
+            site
+          }
           description
           averageScore
           genres
+
+          characters {
+            nodes {
+              id
+              name {
+                native
+                full
+              }
+              image {
+                large
+                medium
+              }
+              age
+              gender
+              siteUrl
+            }
+          }
         }
       }
     ''';

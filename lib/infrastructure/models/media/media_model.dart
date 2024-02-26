@@ -1,3 +1,6 @@
+import 'package:anilistapp/infrastructure/infrastructure.dart';
+import 'package:anilistapp/infrastructure/models/character/character_model.dart';
+
 class MediaModel {
   final int id;
   final MediaTitle title;
@@ -6,6 +9,8 @@ class MediaModel {
   final String description;
   final int averageScore;
   final List<String> genres;
+  final List<CharacterModel>? characters;
+  final MediaTrailer? trailer;
 
   MediaModel({
     required this.id,
@@ -15,6 +20,8 @@ class MediaModel {
     required this.description,
     required this.averageScore,
     required this.genres,
+    this.characters = const [],
+    this.trailer,
   });
 
   factory MediaModel.fromJson(Map<String, dynamic> json) {
@@ -28,7 +35,18 @@ class MediaModel {
       genres: ((json['genres'] ?? []) as List<dynamic>)
           .map((genre) => genre as String)
           .toList(),
+      characters: ((json['characters']?['nodes'] ?? []) as List<dynamic>)
+          .map((character) => CharacterModel.fromJson(character))
+          .toList(),
+      trailer: json['trailer'] != null
+          ? MediaTrailer.fromJson(json['trailer'])
+          : null,
     );
+  }
+
+  @override
+  String toString() {
+    return 'MediaModel(id: $id, title: $title, coverImage: $coverImage, bannerImage: $bannerImage, description: $description, averageScore: $averageScore, genres: $genres, characters: $characters, trailer: $trailer)';
   }
 }
 
@@ -53,6 +71,11 @@ class MediaCoverImage {
       extraLarge: json['extraLarge'] ?? 'https://via.placeholder.com/150',
     );
   }
+
+  @override
+  String toString() {
+    return 'MediaCoverImage(color: $color, large: $large, medium: $medium, extraLarge: $extraLarge)';
+  }
 }
 
 class MediaTitle {
@@ -73,4 +96,32 @@ class MediaTitle {
       native: json['native'] ?? 'No native title',
     );
   }
+
+  @override
+  String toString() =>
+      'MediaTitle(romaji: $romaji, english: $english, native: $native)';
+}
+
+class MediaTrailer {
+  MediaTrailer({
+    required this.id,
+    required this.site,
+    required this.thumbnail,
+  });
+
+  factory MediaTrailer.fromJson(Map<String, dynamic> json) {
+    return MediaTrailer(
+      id: json['id'] ?? '',
+      site: json['site'] ?? '',
+      thumbnail: json['thumbnail'] ?? '',
+    );
+  }
+
+  final String id;
+  final String site;
+  final String thumbnail;
+
+  @override
+  String toString() =>
+      'MediaTrailerModel(id: $id, site: $site, thumbnail: $thumbnail)';
 }

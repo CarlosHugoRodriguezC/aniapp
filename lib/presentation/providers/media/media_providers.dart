@@ -46,5 +46,7 @@ FutureOr<MediaEntity> getMediaById(GetMediaByIdRef ref, int id) async {
 
   final result = await repository.getMedia(id);
 
+  print('result: $result');
+
   return result;
 }

@@ -10,6 +10,7 @@ const TextStyle baseTextStyle = TextStyle(
 
 final appTheme = ThemeData(
   colorSchemeSeed: Colors.red,
+  brightness: Brightness.light,
   fontFamily: GoogleFonts.roboto().fontFamily,
   textTheme: TextTheme(
     titleLarge: baseTextStyle.copyWith(

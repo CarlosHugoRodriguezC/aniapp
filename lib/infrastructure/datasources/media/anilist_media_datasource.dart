@@ -31,8 +31,7 @@ class AnilistMediaDatasource implements MediaDatasource {
       }
 
       final response = MediaModel.fromJson(result.data!['Media']);
-
-      return MediaMapper.mapToEntity(response);
+      return MediaMapper.modelToEntity(response);
     } catch (e) {
       rethrow;
     }
@@ -60,7 +59,7 @@ class AnilistMediaDatasource implements MediaDatasource {
 
       final response = PageMediaModel.fromJson(result.data!['Page']);
 
-      return response.media.map((m) => MediaMapper.mapToEntity(m)).toList();
+      return response.media.map((m) => MediaMapper.modelToEntity(m)).toList();
     } catch (e) {
       rethrow;
     }
@@ -89,7 +88,7 @@ class AnilistMediaDatasource implements MediaDatasource {
       final response = PageMediaTrendsModel.fromJson(result.data!['Page']);
 
       return response.mediaTrends
-          .map((m) => MediaMapper.mapToEntity(m.media))
+          .map((m) => MediaMapper.modelToEntity(m.media))
           .toList();
     } catch (e) {
       rethrow;
@@ -118,7 +117,7 @@ class AnilistMediaDatasource implements MediaDatasource {
 
       final response = MediaModel.fromJson(result.data!['Media']);
 
-      return MediaMapper.mapToEntity(response);
+      return MediaMapper.modelToEntity(response);
     } catch (e) {
       rethrow;
     }
