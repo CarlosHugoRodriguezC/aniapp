@@ -1,8 +1,9 @@
-import 'package:anilistapp/domain/entities/media_entity.dart';
+import 'package:anilistapp/domain/domain.dart';
 
 abstract class MediaDatasource {
-  Future<List<MediaEntity>> getMediaList();
-  Future<List<MediaEntity>> getMediaTrending();
-  Future<MediaEntity> getMedia(int id);
-  Future<MediaEntity> getPopularMediaOfYear(int year);
+  Future<(HomeListsEntity? homeLists, String? message)> getHomeMediaLists();
+  Future<(List<MediaEntity>? media, String? message)> getMediaList();
+  Future<(List<MediaEntity>? media, String? message)> getMediaTrending();
+  Future<(MediaEntity? media, String? message)> getMedia(int id);
+  Future<(MediaEntity? media, String? message)> getPopularMediaOfYear(int year);
 }

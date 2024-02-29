@@ -179,25 +179,27 @@ class _ViewContent extends StatelessWidget {
                     final character = media.characters![index];
                     return Container(
                       margin: EdgeInsets.only(right: 0.05.sw),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10.r)),
-                        child: Column(
-                          children: [
-                            Image.network(
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10.r),
+                            ),
+                            child: Image.network(
                               character.image,
                               height: 0.25.sh,
                             ),
-                            Text(
-                              character.name,
-                              maxLines: 1,
-                              style: titleSmall?.copyWith(
-                                fontWeight: FontWeight.w900,
-                                fontSize: 14.sp,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                          ),
+                          Text(
+                            character.name,
+                            maxLines: 1,
+                            style: titleSmall?.copyWith(
+                              fontWeight: FontWeight.w900,
+                              fontSize: 14.sp,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     );
                   },

@@ -23,7 +23,40 @@ final getMediaRepositoryProvider =
 );
 
 typedef GetMediaRepositoryRef = AutoDisposeProviderRef<MediaRepository>;
-String _$getMediaListHash() => r'32fb4288cd403fbc6e5113ce34d6361cb5df994e';
+String _$getHomeMediaListsHash() => r'b8a2fb735ebacf92c32873bf4fbb86a22abb2cb0';
+
+/// See also [getHomeMediaLists].
+@ProviderFor(getHomeMediaLists)
+final getHomeMediaListsProvider =
+    AutoDisposeFutureProvider<HomeListsEntity>.internal(
+  getHomeMediaLists,
+  name: r'getHomeMediaListsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getHomeMediaListsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetHomeMediaListsRef = AutoDisposeFutureProviderRef<HomeListsEntity>;
+String _$getTheMostPopularMediaHash() =>
+    r'895af95e970f1da5bb391480e203d3d861c72882';
+
+/// See also [getTheMostPopularMedia].
+@ProviderFor(getTheMostPopularMedia)
+final getTheMostPopularMediaProvider =
+    AutoDisposeFutureProvider<MediaEntity>.internal(
+  getTheMostPopularMedia,
+  name: r'getTheMostPopularMediaProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$getTheMostPopularMediaHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef GetTheMostPopularMediaRef = AutoDisposeFutureProviderRef<MediaEntity>;
+String _$getMediaListHash() => r'9b3e1c39c2c449950990953c162ad3ed841958c1';
 
 /// See also [getMediaList].
 @ProviderFor(getMediaList)
@@ -38,7 +71,7 @@ final getMediaListProvider =
 );
 
 typedef GetMediaListRef = AutoDisposeFutureProviderRef<List<MediaEntity>>;
-String _$getMediaTrendsHash() => r'15fe43d59c2eeec0fd300daa8adcf939d7e68c61';
+String _$getMediaTrendsHash() => r'fde9fae405c21b9f38df02d6b376b3fbda7d5254';
 
 /// See also [getMediaTrends].
 @ProviderFor(getMediaTrends)
@@ -55,7 +88,7 @@ final getMediaTrendsProvider =
 
 typedef GetMediaTrendsRef = AutoDisposeFutureProviderRef<List<MediaEntity>>;
 String _$getMediaPopularOfSeasonYearHash() =>
-    r'9a3c0394cb5122e1e6b5f31cf8a6b7fa916a5a66';
+    r'69553080b182a54294ee832b73be45512f3093ea';
 
 /// See also [getMediaPopularOfSeasonYear].
 @ProviderFor(getMediaPopularOfSeasonYear)
@@ -72,7 +105,7 @@ final getMediaPopularOfSeasonYearProvider =
 
 typedef GetMediaPopularOfSeasonYearRef
     = AutoDisposeFutureProviderRef<MediaEntity>;
-String _$getMediaByIdHash() => r'9b445752b45a63f012d7aaa1b951d9069321b851';
+String _$getMediaByIdHash() => r'd0909ac02541635409c861086d1c1b3441856512';
 
 /// Copied from Dart SDK
 class _SystemHash {

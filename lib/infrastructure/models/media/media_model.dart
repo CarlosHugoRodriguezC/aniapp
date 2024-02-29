@@ -91,7 +91,7 @@ class MediaTitle {
 
   factory MediaTitle.fromJson(Map<String, dynamic> json) {
     return MediaTitle(
-      romaji: json['romaji'],
+      romaji: json['romaji'] ?? "No Romaji title",
       english: json['english'] ?? 'No English title',
       native: json['native'] ?? 'No native title',
     );

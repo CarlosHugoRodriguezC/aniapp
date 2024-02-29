@@ -26,7 +26,7 @@ class MainBanner extends StatelessWidget {
     ) = Theme.of(context).textTheme;
 
     return Container(
-      height: 400.h,
+      height: 350.h,
       width: double.infinity,
       decoration: BoxDecoration(
         color: colorScheme.background,
@@ -103,6 +103,101 @@ class MainBanner extends StatelessWidget {
                   ],
                 ),
               )),
+        ],
+      ),
+    );
+  }
+}
+
+class MainBannerLoading extends StatelessWidget {
+  const MainBannerLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final decoration = BoxDecoration(
+      color: Colors.grey[300],
+      boxShadow: null,
+      borderRadius: BorderRadius.circular(10.r),
+    );
+
+    return Container(
+      height: 350.h,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: colorScheme.background,
+        boxShadow: null,
+      ),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(bottom: 1),
+            child: Container(
+              color: Colors.grey[300],
+              width: double.infinity,
+              height: double.infinity,
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                stops: const [0.0, 0.95],
+                colors: [
+                  colorScheme.background.withOpacity(0.0),
+                  colorScheme.background,
+                ],
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 250.w,
+                    child: Container(
+                      decoration: decoration,
+                      height: 30.h,
+                    ),
+                  ),
+                  SizedBox(height: 16.h),
+                  Container(
+                    decoration: decoration,
+                    height: 20.h,
+                  ),
+                  SizedBox(height: 16.h),
+                  Row(
+                    children: [
+                      const CustomFilledButton(
+                        label: 'Details',
+                        icon: Icons.arrow_forward_ios_outlined,
+                        onPressed: null,
+                      ),
+                      SizedBox(width: 10.w),
+                      CustomIconButton(
+                        icon: Icons.favorite_outline,
+                        backgroundColor: Colors.black.withOpacity(0.7),
+                        onPressed: null,
+                      ),
+                      SizedBox(width: 10.w),
+                      CustomIconButton(
+                        icon: Icons.share_outlined,
+                        backgroundColor: Colors.black.withOpacity(0.7),
+                        onPressed: null,
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 10.h),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

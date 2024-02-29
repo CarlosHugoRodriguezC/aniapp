@@ -1,6 +1,7 @@
 import 'package:anilistapp/domain/domain.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MediaSectionSlider extends StatefulWidget {
   const MediaSectionSlider({
@@ -47,7 +48,7 @@ class _MediaSectionSliderState extends State<MediaSectionSlider> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 350,
+      height: 310,
       child: Column(
         children: [
           if (widget.title != null || widget.subtitle != null) ...[
@@ -211,6 +212,73 @@ class _Title extends StatelessWidget {
               ),
               child: Text(subtitle!),
             )
+        ],
+      ),
+    );
+  }
+}
+
+class MediaSectionSliderLoading extends StatelessWidget {
+  const MediaSectionSliderLoading({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final decoration = BoxDecoration(
+      color: Colors.grey[300],
+      borderRadius: BorderRadius.circular(20),
+    );
+
+    return SizedBox(
+      height: 310,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+            child: Container(
+              decoration: decoration,
+              height: 16.h,
+              width: 100.w,
+            ),
+          ),
+          Expanded(
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: 5,
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.w,
+              ),
+              separatorBuilder: (context, index) => SizedBox(
+                width: 10.w,
+              ),
+              itemBuilder: (context, index) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 150.w,
+                    height: 200.h,
+                    decoration: decoration,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    decoration: decoration,
+                    height: 16.h,
+                    width: 100.w,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Container(
+                    decoration: decoration,
+                    height: 16.h,
+                    width: 50.w,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

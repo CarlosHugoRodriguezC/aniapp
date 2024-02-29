@@ -10,14 +10,14 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mediaPopular$ = ref.watch(getMediaPopularOfSeasonYearProvider);
-    final mediaList$ = ref.watch(getMediaListProvider);
+    final homeMediaListsAsync = ref.watch(getHomeMediaListsProvider);
+    final mostPopularAsync = ref.watch(getTheMostPopularMediaProvider);
 
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            mediaPopular$.when(
+            mostPopularAsync.when(
               data: (media) => MainBanner(
                 media: media,
                 onMoreDetails: () => context.push('/media/${media.id}'),
@@ -27,21 +27,50 @@ class HomeScreen extends ConsumerWidget {
               error: (error, stackTrace) => Center(
                 child: Text('Error: $error'),
               ),
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
-              ),
+              loading: () => const MainBannerLoading(),
             ),
             const SizedBox(height: 16),
-            mediaList$.when(
-              data: (medias) => MediaSectionSlider(
-                title: "Popular of season",
-                medias: medias,
-                onTapSlide: (id) => context.push('/media/$id'),
-              ),
-              loading: () => const Center(
-                child: CircularProgressIndicator(),
+            homeMediaListsAsync.when(
+              data: (medias) {
+                return Column(
+                  children: [
+                    MediaSectionSlider(
+                      medias: medias.seasonalMedia,
+                      title: 'Seasonal Animes',
+                      onTapSlide: (id) => context.push('/media/$id'),
+                    ),
+                    MediaSectionSlider(
+                      medias: medias.popularMedia,
+                      title: 'Popular Animes',
+                      onTapSlide: (id) => context.push('/media/$id'),
+                    ),
+                    MediaSectionSlider(
+                      medias: medias.trendingMedia,
+                      title: 'Trending Animes',
+                      onTapSlide: (id) => context.push('/media/$id'),
+                    ),
+                    MediaSectionSlider(
+                      medias: medias.nextSeasonMedia,
+                      title: 'Next Season Animes',
+                      onTapSlide: (id) => context.push('/media/$id'),
+                    ),
+                    MediaSectionSlider(
+                      medias: medias.topMedia,
+                      title: 'Top Animes',
+                      onTapSlide: (id) => context.push('/media/$id'),
+                    )
+                  ],
+                );
+              },
+              loading: () => Column(
+                children: [
+                  MediaSectionSliderLoading(),
+                  MediaSectionSliderLoading(),
+                ],
               ),
               error: (error, stackTrace) {
+                debugPrint('Error: $error');
+                debugPrintStack(stackTrace: stackTrace);
                 return Center(
                   child: Text('Error: $error'),
                 );

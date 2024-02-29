@@ -6,22 +6,27 @@ class MediaRepositoryImpl extends MediaRepository {
   MediaRepositoryImpl(this._mediaDatasource);
 
   @override
-  Future<List<MediaEntity>> getMediaList() {
-    return _mediaDatasource.getMediaList();
+  Future<(HomeListsEntity?, String?)> getHomeMediaLists() {
+    return _mediaDatasource.getHomeMediaLists();
   }
 
   @override
-  Future<MediaEntity> getMedia(int id) {
+  Future<(MediaEntity?, String?)> getMedia(int id) {
     return _mediaDatasource.getMedia(id);
   }
 
   @override
-  Future<List<MediaEntity>> getMediaTrending() {
+  Future<(List<MediaEntity>?, String?)> getMediaList() {
+    return _mediaDatasource.getMediaList();
+  }
+
+  @override
+  Future<(List<MediaEntity>?, String?)> getMediaTrending() {
     return _mediaDatasource.getMediaTrending();
   }
 
   @override
-  Future<MediaEntity> getPopularMediaOfYear(int year) {
+  Future<(MediaEntity?, String?)> getPopularMediaOfYear(int year) {
     return _mediaDatasource.getPopularMediaOfYear(year);
   }
 }
