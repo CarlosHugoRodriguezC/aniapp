@@ -7,16 +7,20 @@ class NotFoundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const Text('Not Found'),
-        FilledButton(
-          onPressed: () => context.replace('/'),
-          child: const Text('Go Home'),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text('Not Found', style: TextStyle(fontSize: 32)),
+            const SizedBox(height: 16),
+            FilledButton(
+              onPressed: () => context.go('/home'),
+              child: const Text('Go Home'),
+            ),
+          ],
         ),
-      ],
-    ));
+      ),
+    );
   }
 }

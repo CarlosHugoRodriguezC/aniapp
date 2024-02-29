@@ -36,33 +36,33 @@ class HomeScreen extends ConsumerWidget {
                   children: [
                     MediaSectionSlider(
                       medias: medias.seasonalMedia,
-                      title: 'Seasonal Animes',
+                      title: 'Seasonal',
                       onTapSlide: (id) => context.push('/media/$id'),
                     ),
                     MediaSectionSlider(
                       medias: medias.popularMedia,
-                      title: 'Popular Animes',
+                      title: 'Popular',
                       onTapSlide: (id) => context.push('/media/$id'),
                     ),
                     MediaSectionSlider(
                       medias: medias.trendingMedia,
-                      title: 'Trending Animes',
+                      title: 'Trending',
                       onTapSlide: (id) => context.push('/media/$id'),
                     ),
                     MediaSectionSlider(
                       medias: medias.nextSeasonMedia,
-                      title: 'Next Season Animes',
+                      title: 'Next Season',
                       onTapSlide: (id) => context.push('/media/$id'),
                     ),
                     MediaSectionSlider(
                       medias: medias.topMedia,
-                      title: 'Top Animes',
+                      title: 'Top',
                       onTapSlide: (id) => context.push('/media/$id'),
                     )
                   ],
                 );
               },
-              loading: () => Column(
+              loading: () => const Column(
                 children: [
                   MediaSectionSliderLoading(),
                   MediaSectionSliderLoading(),
