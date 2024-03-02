@@ -19,10 +19,38 @@ class MainLayout extends ConsumerWidget {
           backgroundColor: background,
           elevation: 0,
           destinations: const [
-            NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-            NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
-            NavigationDestination(icon: Icon(Icons.favorite), label: 'Library'),
-            NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
+            NavigationDestination(
+              icon: Icon(Icons.home_outlined),
+              selectedIcon: Icon(
+                Icons.home,
+                color: Colors.red,
+              ),
+              label: 'Home',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.search_outlined),
+              selectedIcon: Icon(
+                Icons.search,
+                color: Colors.red,
+              ),
+              label: 'Search',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.favorite_outlined),
+              selectedIcon: Icon(
+                Icons.favorite,
+                color: Colors.red,
+              ),
+              label: 'Library',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.person_outlined),
+              selectedIcon: Icon(
+                Icons.person,
+                color: Colors.red,
+              ),
+              label: 'Profile',
+            ),
           ],
           onDestinationSelected: (index) {
             ref.read(bottomBarIndexProvider.notifier).setIndex(index);

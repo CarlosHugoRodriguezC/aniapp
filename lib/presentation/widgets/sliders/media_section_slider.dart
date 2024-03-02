@@ -259,20 +259,20 @@ class MediaSectionSliderLoading extends StatelessWidget {
                     height: 200.h,
                     decoration: decoration,
                   ),
-                  const SizedBox(
-                    height: 5,
+                  SizedBox(
+                    height: 3.h,
                   ),
                   Container(
                     decoration: decoration,
-                    height: 16.h,
+                    height: 14.h,
                     width: 100.w,
                   ),
-                  const SizedBox(
-                    height: 5,
+                  SizedBox(
+                    height: 3.h,
                   ),
                   Container(
                     decoration: decoration,
-                    height: 16.h,
+                    height: 14.h,
                     width: 50.w,
                   ),
                 ],
